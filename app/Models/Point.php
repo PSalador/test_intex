@@ -19,6 +19,12 @@ class Point extends Model
         'comment',
     ];
 
+    protected $appends = [
+        'lat',
+        'lng',
+        'categories_in_string',
+    ];
+
     protected $spatialFields = [
         'latlng',
     ];
@@ -32,5 +38,38 @@ class Point extends Model
         return $this->belongsToMany(Category::class, 'point_categories', 'point_id', 'category_id');
     }
 
+    /**
+     * Get lat from latlng
+     *
+     * @return float
+     */
+    public function getLatAttribute()
+    {
+        return $this->latlng->getLat();
+    }
+
+    /**
+     * Get lng from latlng
+     *
+     * @return float
+     */
+    public function getLngAttribute()
+    {
+        return $this->latlng->getLng();
+    }
+
+    /**
+     * Get categories names
+     *
+     * @return float
+     */
+    public function getCategoriesInStringAttribute()
+    {
+        if (empty($this->categories())) {
+            return null;
+        }
+
+        return implode(", ", $this->categories()->get()->pluck(['name'])->toArray());
+    }
 
 }

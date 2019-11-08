@@ -1,1 +1,40 @@
-//
+// UiKit Theme
+@import "~uikit/src/scss/variables-theme.scss";
+@import "~uikit/src/scss/mixins-theme.scss";
+@import "~uikit/src/scss/uikit-theme.scss";
+@import '~leaflet/dist/leaflet.css';
+@import '~vue-multiselect/dist/vue-multiselect.min.css';
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+}
+.leaflet-container {
+  .bottom-btn {
+    z-index: 1001;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .uk-card {
+    z-index: 1001;
+    position: absolute;
+    margin-top: 100px;
+  }
+
+  .uk-icon-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .multiselect__tag{
+    background: #4a8abf;
+  }
+  .multiselect__option--highlight {
+    background: #7ac9e8;
+  }
+  .multiselect__option--highlight:after {
+    background: #6db7d4;
+  }
+}

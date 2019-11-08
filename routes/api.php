@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Api')->group(function () {
+    Route::post('getpoints', 'MapController@getPoints');
+    Route::post('addpoint', 'MapController@addPoint');
+    Route::post('getcategory', 'MapController@getCategory');
+    Route::post('addcategory', 'MapController@addCategory');
+});
+
+
