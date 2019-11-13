@@ -36,29 +36,21 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         data() {
             return {
-                loading: true,
                 zoom:13,
                 center: L.latLng(55.75, 37.60),
                 url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution:'ИНТЕКС',
-                markers: []
             };
         },
+        computed: mapState(['markers', 'loading']),
         created() {
-            var app = this;
-            axios.post('/api/getpoints')
-                .then(function (resp) {
-                    app.markers = resp.data;
-                    app.loading = false;
-                })
-                .catch(function (resp) {
-                    console.log(resp);
-                    alert("Could not load points");
-                });
-       },
+            this.$store.dispatch('loadData')
+        },
         methods: {
             zoomUpdate(zoom) {
                 this.currentZoom = zoom;
